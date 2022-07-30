@@ -1,0 +1,2 @@
+[workspace]
+members = ["section01_variables"]
