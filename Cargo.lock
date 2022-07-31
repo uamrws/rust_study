@@ -5,3 +5,11 @@ version = 3
 [[package]]
 name = "section01_variables"
 version = "0.1.0"
+
+[[package]]
+name = "section02_slice"
+version = "0.1.0"
+
+[[package]]
+name = "section03_struct"
+version = "0.1.0"
