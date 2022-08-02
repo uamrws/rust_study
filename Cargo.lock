@@ -13,3 +13,11 @@ version = "0.1.0"
 [[package]]
 name = "section03_struct"
 version = "0.1.0"
+
+[[package]]
+name = "section04_ownership"
+version = "0.1.0"
+
+[[package]]
+name = "section05_compound_type"
+version = "0.1.0"
