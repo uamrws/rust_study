@@ -21,3 +21,11 @@ version = "0.1.0"
 [[package]]
 name = "section05_compound_type"
 version = "0.1.0"
+
+[[package]]
+name = "section06_trait"
+version = "0.1.0"
+
+[[package]]
+name = "section07_trait-object"
+version = "0.1.0"
