@@ -29,3 +29,7 @@ version = "0.1.0"
 [[package]]
 name = "section07_trait-object"
 version = "0.1.0"
+
+[[package]]
+name = "section08_vector"
+version = "0.1.0"
