@@ -37,3 +37,7 @@ version = "0.1.0"
 [[package]]
 name = "section09_type-convert"
 version = "0.1.0"
+
+[[package]]
+name = "section10_lifetime"
+version = "0.1.0"
