@@ -1,32 +1,18 @@
-#![allow(unused)]
+use std::{slice::from_raw_parts, str::from_utf8_unchecked};
+
 fn main() {
-    // &'a mut &'b 两个引用时，编译器会默认'b: 'a
-    fn temp<'a, 'b>(s: &'b mut &'a str) -> &'b mut &'b str {
-        s
+    let d;
+    {
+        let a = String::from("asd");
+
+        let s = &a;
+        let p = s.as_ptr() as usize;
+        let l = s.len();
+        d = get_str_at_location(p, l);
     }
-    // 可以通过编译
-    // fn temp<'a, 'b>(s: &'a mut &'a str) -> &'a mut &'a str
-    // fn temp<'a, 'b>(s: &'a mut &'a str) -> &'b mut &'a str
-    //
-    // fn temp<'a, 'b>(s: &'a mut &'b str) -> &'a mut &'b str
-    // fn temp<'a, 'b>(s: &'a mut &'b str) -> &'b mut &'a str
-    //
-    // fn temp<'a, 'b>(s: &'b mut &'a str) -> &'a mut &'b str
-    // fn temp<'a, 'b>(s: &'b mut &'a str) -> &'b mut &'a str
-    //
-    // fn temp<'a, 'b>(s: &'b mut &'b str) -> &'a mut &'b str
-    // fn temp<'a, 'b>(s: &'b mut &'b str) -> &'b mut &'a str
-    // -----------------------------------------------------
-    // 无法通过编译
-    // fn temp<'a, 'b>(s: &'a mut &'a str) -> &'a mut &'b str
-    // fn temp<'a, 'b>(s: &'a mut &'a str) -> &'b mut &'b str
-    //
-    // fn temp<'a, 'b>(s: &'a mut &'b str) -> &'a mut &'a str
-    // fn temp<'a, 'b>(s: &'a mut &'b str) -> &'b mut &'b str
-    //
-    // fn temp<'a, 'b>(s: &'b mut &'a str) -> &'a mut &'a str
-    // fn temp<'a, 'b>(s: &'b mut &'a str) -> &'b mut &'b str
-    //
-    // fn temp<'a, 'b>(s: &'b mut &'b str) -> &'a mut &'a str
-    // fn temp<'a, 'b>(s: &'b mut &'b str) -> &'b mut &'b str
+    println!("{d}");
+}
+fn get_str_at_location(pointer: usize, length: usize) -> &'static str {
+    // 使用裸指针需要 `unsafe{}` 语句块
+    unsafe { from_utf8_unchecked(from_raw_parts(pointer as *const u8, length)) }
 }

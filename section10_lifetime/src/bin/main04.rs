@@ -1,8 +1,8 @@
-struct Interface<'a, 'b> {
-    manager: &'a mut Manager<'b>,
+struct Interface<'a> {
+    manager: &'a mut Manager<'a>,
 }
 
-impl<'a, 'b> Interface<'a, 'b> {
+impl<'a> Interface<'a> {
     pub fn noop(self) {
         println!("interface consumed");
     }
@@ -16,21 +16,29 @@ struct List<'a> {
     manager: Manager<'a>,
 }
 
-impl<'a, 'b> List<'a> {
-    pub fn get_interface(self: &'b mut List<'a>) -> Interface<'b, 'a> {
-        Interface {
-            manager: &mut self.manager,
-        }
-    }
+// impl<'a, 'b> List<'a> {
+//     pub fn get_interface(self: &'b mut List<'a>) -> Interface<'b>
+//     where
+//         'a: 'b,
+//     {
+//         Interface {
+//             manager: &mut self.manager,
+//         }
+//     }
+// }
+fn temp<'a, 'b>(s: &'b mut List<'a>) -> &'b mut Manager<'b> {
+    &mut s.manager
 }
-
+fn temp2<'a, 'b>(s: &'b mut List<'a>) -> &'b mut String {
+    s.manager.text
+}
 fn main() {
     let mut s = String::from("hello");
     let mut list = List {
         manager: Manager { text: &mut s },
     };
 
-    list.get_interface();
+    temp(&mut list);
 
     println!("Interface should be dropped here and the borrow released");
 
