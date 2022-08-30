@@ -45,3 +45,11 @@ version = "0.1.0"
 [[package]]
 name = "section11_closure"
 version = "0.1.0"
+
+[[package]]
+name = "section12_iterator"
+version = "0.1.0"
+
+[[package]]
+name = "section13_smart_pointer"
+version = "0.1.0"
