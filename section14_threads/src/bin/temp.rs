@@ -1,13 +1,24 @@
+use std::cell::Cell;
+use std::sync::{Arc, Barrier};
 use std::thread;
+use std::time::Duration;
 
 fn main() {
-    let v = vec![1, 2, 3];
+    let mut handles = Vec::with_capacity(6);
+    let barrier = Arc::new(Barrier::new(1));
 
-    let handle = thread::spawn(|| {
-        println!("Here's a vector: {:?}", v);
-    });
+    for i in 0..6 {
+        let b = barrier.clone();
+        handles.push(thread::spawn(move || {
+            println!("before wait{}", i);
+            b.wait();
+            println!("after wait");
+        }));
+    }
 
-    drop(v); // oh no!
-
-    handle.join().unwrap();
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    const a: Cell<&str> = Cell::new("asd");
+    a.set("asdss");
 }

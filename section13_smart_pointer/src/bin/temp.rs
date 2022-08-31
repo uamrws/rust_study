@@ -19,3 +19,4 @@ fn main() {
     let pp: Option<Rc<_>> = weak_five.upgrade();
     assert_eq!(pp, None);
 }
+
