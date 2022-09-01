@@ -1,24 +1,14 @@
-use std::cell::Cell;
-use std::sync::{Arc, Barrier};
+use std::sync::Arc;
 use std::thread;
-use std::time::Duration;
 
 fn main() {
-    let mut handles = Vec::with_capacity(6);
-    let barrier = Arc::new(Barrier::new(1));
+    let s = Arc::new(String::from("多线程漫游者"));
+    for _ in 0..10 {
+        let s = Arc::clone(&s);
 
-    for i in 0..6 {
-        let b = barrier.clone();
-        handles.push(thread::spawn(move || {
-            println!("before wait{}", i);
-            b.wait();
-            println!("after wait");
-        }));
+        let handle = thread::spawn(move || {
+            s.clone();
+            println!("{}", s)
+        });
     }
-
-    for handle in handles {
-        handle.join().unwrap();
-    }
-    const a: Cell<&str> = Cell::new("asd");
-    a.set("asdss");
 }
