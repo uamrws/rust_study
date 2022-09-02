@@ -1,14 +1,7 @@
-use std::sync::Arc;
-use std::thread;
-
+static mut A: String = String::new();
 fn main() {
-    let s = Arc::new(String::from("多线程漫游者"));
-    for _ in 0..10 {
-        let s = Arc::clone(&s);
-
-        let handle = thread::spawn(move || {
-            s.clone();
-            println!("{}", s)
-        });
+    unsafe {
+        A.push_str("asd");
+        println!("{}", A)
     }
 }
