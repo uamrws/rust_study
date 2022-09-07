@@ -20,11 +20,11 @@ async fn handle_connection(mut stream: TcpStream, addr: SocketAddr) {
     stream.read(&mut buffer).await.unwrap();
     let get = b"GET / HTTP/1.1\r\n";
     let (status_line, filename) = if buffer.starts_with(get) {
-        ("HTTP/1.1 200 OK\r\n\r\n", "section21_web_server/hello.html")
+        ("HTTP/1.1 200 OK\r\n\r\n", "section20_web_server/hello.html")
     } else {
         (
             "HTTP/1.1 404 NOT FOUND\r\n\r\n",
-            "section21_web_server/404.html",
+            "section20_web_server/404.html",
         )
     };
     let content = tokio::fs::read_to_string(filename).await.unwrap();
