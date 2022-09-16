@@ -2,7 +2,7 @@
 fn main() {
     #[macro_export]
     macro_rules! temp_vec {
-        ( $( $x:expr );* ) => {
+        ( $( $x:expr);+ $(;)? ) => {
             {
                 let mut temp_vec = Vec::new();
                 $(
@@ -12,7 +12,7 @@ fn main() {
             }
         };
     };
-    let b = vec!(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    let b = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
     let a = temp_vec![1; 2];
     println!("a: {:?}", a);
 }
