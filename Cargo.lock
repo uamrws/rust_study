@@ -385,6 +385,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "section22_macro"
+version = "0.1.0"
+dependencies = [
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "section_timer_future"
 version = "0.1.0"
 
